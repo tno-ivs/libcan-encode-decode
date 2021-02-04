@@ -8,7 +8,7 @@
 #define MASK64(nbits) ((0xffffffffffffffff) >> (64 - nbits))
 
 
-inline float toPhysicalValue(uint64_t target, float factor, float offset, bool is_signed)
+inline double toPhysicalValue(uint64_t target, double factor, float offset, bool is_signed)
 {
   if (is_signed)
     return ((int64_t)target) * factor + offset;
@@ -121,8 +121,8 @@ inline uint64_t extractSignal(const uint8_t* frame, const uint8_t startbit, cons
 
 // For Vector CAN DB files https://vector.com/vi_candb_en.html
 
-inline float decode(const uint8_t* frame, const uint16_t startbit, const uint16_t length, bool is_big_endian,
-                    bool is_signed, float factor, float offset)
+inline double decode(const uint8_t* frame, const uint16_t startbit, const uint16_t length, bool is_big_endian,
+                    bool is_signed, double factor, float offset)
 {
   return toPhysicalValue(extractSignal(frame, startbit, length, is_big_endian, is_signed), factor, offset, is_signed);
 }
